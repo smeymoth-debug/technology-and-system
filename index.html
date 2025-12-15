@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<!--
+  Technology & Systems Website
+  Features included:
+  - Modern dark tech-style UI
+  - Fully responsive (mobile & desktop)
+  - Sections: Hero, About, Services, Stats, Contact
+  - Smooth hover effects & animated cards
+  - JavaScript counter animation for system stats
+  - Clean, beginner-friendly code with comments
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tech & Systems</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f1a;
+      --card: #12172a;
+      --primary: #4f7cff;
+      --secondary: #00e5ff;
+      --text: #e8ebf1;
+      --muted: #9aa3b2;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #0b0f1a, #060914);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11,15,26,0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--secondary);
+      letter-spacing: 0.5px;
+    }
+
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 1.2rem;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav a:hover { color: var(--text); }
+
+    .hero {
+      max-width: 1200px;
+      margin: auto;
+      padding: 5rem 1.5rem 4rem;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #000;
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 10px 30px rgba(79,124,255,0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 40px rgba(79,124,255,0.45);
+    }
+
+    .hero-card {
+      background: radial-gradient(circle at top, #1a2250, var(--card));
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+    }
+
+    .hero-card ul {
+      list-style: none;
+      margin-top: 1rem;
+    }
+
+    .hero-card li {
+      margin-bottom: 0.8rem;
+      color: var(--muted);
+    }
+
+    section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 4rem 1.5rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 1.8rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .card h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .card p { color: var(--muted); font-size: 0.95rem; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .stat {
+      background: linear-gradient(180deg, #141a33, #0e1328);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .stat h2 {
+      font-size: 2.2rem;
+      color: var(--secondary);
+      margin-bottom: 0.4rem;
+    }
+
+    .stat span { color: var(--muted); font-size: 0.9rem; }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav">
+      <div class="logo">TechSystems</div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#stats">Stats</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div>
+        <h1>Technology & Systems<br>Powering the Future</h1>
+        <p>
+          We explore modern technology, secure systems, and innovative digital
+          solutions that shape the future of computing, networks, and
+          cybersecurity.
+        </p>
+        <a href="#services" class="btn">Explore Systems</a>
+      </div>
+      <div class="hero-card">
+        <h3>Core Focus</h3>
+        <ul>
+          <li>• Scalable System Architecture</li>
+          <li>• Cybersecurity & Data Protection</li>
+          <li>• Cloud & Network Technologies</li>
+          <li>• Software Engineering</li>
+        </ul>
+      </div>
+    </div>
+
+    <section id="about">
+      <h2 class="section-title">About Technology & Systems</h2>
+      <p class="section-desc">
+        Technology and systems work together to create reliable, secure, and
+        efficient digital environments. From hardware to software, every system
+        must be designed with performance and security in mind.
+      </p>
+    </section>
+
+    <section id="services">
+      <h2 class="section-title">Our Key Areas</h2>
+      <p class="section-desc">
+        These are the main technology domains that drive modern digital systems.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>System Architecture</h3>
+          <p>
+            Designing scalable and efficient systems that support growing
+            applications and users.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Cybersecurity</h3>
+          <p>
+            Protecting systems from threats using best practices, encryption,
+            and monitoring.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Cloud Computing</h3>
+          <p>
+            Leveraging cloud platforms to deploy, manage, and scale applications
+            globally.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Networking</h3>
+          <p>
+            Building reliable networks that connect devices, systems, and
+            services securely.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="stats">
+      <h2 class="section-title">Technology Impact</h2>
+      <p class="section-desc">
+        Some example metrics showing how technology systems influence the world.
+      </p>
+      <div class="stats">
+        <div class="stat">
+          <h2 data-count="99">0</h2>
+          <span>System Uptime (%)</span>
+        </div>
+        <div class="stat">
+          <h2 data-count="500">0</h2>
+          <span>Servers Managed</span>
+        </div>
+        <div class="stat">
+          <h2 data-count="120">0</h2>
+          <span>Security Audits</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 class="section-title">Get in Touch</h2>
+      <p class="section-desc">
+        Interested in technology and systems? Let’s connect and build the
+        future together.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 TechSystems. All rights reserved.
+  </footer>
+
+  <script>
+    // Simple counter animation
+    const counters = document.querySelectorAll('[data-count]');
+    const speed = 60;
+
+    const animateCounters = () => {
+      counters.forEach(counter => {
+        const target = +counter.getAttribute('data-count');
+        const update = () => {
+          const current = +counter.innerText;
+          const increment = Math.ceil(target / speed);
+          if (current < target) {
+            counter.innerText = current + increment;
+            setTimeout(update, 30);
+          } else {
+            counter.innerText = target;
+          }
+        };
+        update();
+      });
+    };
+
+    let started = false;
+    window.addEventListener('scroll', () => {
+      const section = document.getElementById('stats');
+      const top = section.getBoundingClientRect().top;
+      if (top < window.innerHeight && !started) {
+        started = true;
+        animateCounters();
+      }
+    });
+  </script>
+</body>
+</html>
